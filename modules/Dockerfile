@@ -1,4 +1,4 @@
-FROM nginx:mainline as builder
+FROM nginx:1.26.0-bookworm as builder
 
 ARG ENABLED_MODULES
 
@@ -58,7 +58,7 @@ RUN set -ex \
     done \
     && echo "BUILT_MODULES=\"$BUILT_MODULES\"" > /tmp/packages/modules.env
 
-FROM nginx:mainline
+FROM nginx:1.26.0-bookworm
 COPY --from=builder /tmp/packages /tmp/packages
 RUN set -ex \
     && apt update \
